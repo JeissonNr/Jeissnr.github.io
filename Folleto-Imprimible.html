@@ -4,577 +4,747 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Folleto Meta Ads — Unos Tipos Duros · JNR Digital</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy:       #0A1628;
-    --navy-mid:   #1A2E4A;
-    --navy-light: #2A4060;
-    --blue:       #4A9EF0;
-    --blue-muted: #7B9BC0;
-    --green:      #1D9E75;
-    --green-lt:   #E1F5EE;
-    --green-dk:   #085041;
-    --red:        #E24B4A;
-    --red-lt:     #FFF5F5;
-    --red-dk:     #B71C1C;
-    --amber:      #BA7517;
-    --amber-lt:   #FAEEDA;
-    --white:      #ffffff;
-    --gray-100:   #F0F4F8;
-    --gray-400:   #9BA8B7;
-    --gray-600:   #5A6A7A;
-    --text:       #0A1628;
-    --r:          10px;
-    --rs:         6px;
-  }
+/* ─────────────────────────────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────────────────────────────── */
+:root {
+  --ink:        #07111F;
+  --navy:       #0A1628;
+  --navy-mid:   #152338;
+  --navy-card:  #1B2E46;
+  --blue:       #4A9EF0;
+  --blue-dim:   #7B9BC0;
+  --blue-glow:  rgba(74,158,240,.08);
+  --teal:       #1D9E75;
+  --teal-lt:    #E1F5EE;
+  --teal-dk:    #085041;
+  --red:        #E24B4A;
+  --red-lt:     #FFF2F2;
+  --amber:      #D48A14;
+  --amber-lt:   #FEF3DC;
+  --white:      #FFFFFF;
+  --surface:    #F5F8FC;
+  --border:     #E4EAF2;
+  --muted:      #8A99AD;
+  --r:          8px;
+  --r-sm:       5px;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* ─────────────────────────────────────────────────────────────────
+   RESET + BASE
+───────────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#CDD4E0;
+  color:var(--ink);
+  padding:2.5rem 1rem 5rem;
+}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: #DDE3ED;
-    color: var(--text);
-    padding: 2rem 1rem 4rem;
-  }
+/* ─────────────────────────────────────────────────────────────────
+   PRINT BUTTON (screen only)
+───────────────────────────────────────────────────────────────── */
+.print-cta{
+  display:flex;align-items:center;justify-content:center;
+  gap:32px;
+  margin:0 auto 1.75rem;
+  max-width:210mm;
+}
+.print-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--navy);
+  color:var(--white);
+  font-family:'Syne',sans-serif;
+  font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:10px 24px;
+  border:none;border-radius:40px;cursor:pointer;
+  transition:opacity .2s,transform .15s;
+}
+.print-btn:hover{opacity:.85;transform:translateY(-1px);}
+.print-btn svg{flex-shrink:0;}
+.print-hint{
+  font-size:11px;color:var(--muted);
+  font-style:italic;
+}
 
-  /* ── PRINT BUTTON ─────────────────────────────────────────── */
-  .print-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0 auto 1.5rem;
-    width: fit-content;
-    background: var(--navy);
-    color: var(--white);
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 10px 22px;
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .print-btn:hover { background: var(--navy-mid); transform: translateY(-1px); }
+/* ─────────────────────────────────────────────────────────────────
+   A4 SHELL
+───────────────────────────────────────────────────────────────── */
+.page{
+  width:210mm;
+  min-height:297mm;
+  margin:0 auto;
+  background:var(--white);
+  overflow:hidden;
+  box-shadow:0 12px 60px rgba(7,17,31,.25);
+  display:grid;
+  grid-template-rows:auto auto 1fr auto;
+}
 
-  /* ── PAGE SHELL ───────────────────────────────────────────── */
-  .page {
-    width: 210mm;
-    min-height: 297mm;
-    margin: 0 auto;
-    background: var(--white);
-    border-radius: var(--r);
-    overflow: hidden;
-    box-shadow: 0 8px 40px rgba(10,22,40,0.18);
-    display: flex;
-    flex-direction: column;
-  }
+/* ─────────────────────────────────────────────────────────────────
+   HEADER
+───────────────────────────────────────────────────────────────── */
+.hd{
+  background:var(--navy);
+  position:relative;
+  overflow:hidden;
+  padding:0;
+}
 
-  /* ── HEADER ───────────────────────────────────────────────── */
-  .hd {
-    background: var(--navy);
-    padding: 28px 32px 22px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hd::before {
-    content: '';
-    position: absolute;
-    top: -50px; left: -50px;
-    width: 180px; height: 180px;
-    background: radial-gradient(circle, rgba(74,158,240,.14) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hd::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; right: 20px;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(29,158,117,.10) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hd-inner { position: relative; z-index: 1; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
-  .hd-left {}
-  .hd-eyebrow {
-    font-family: 'Syne', sans-serif;
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--blue-muted);
-    margin-bottom: 8px;
-  }
-  .hd-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--white);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin-bottom: 6px;
-  }
-  .hd-title span { color: var(--blue); }
-  .hd-sub {
-    font-size: 12px;
-    color: var(--blue-muted);
-    font-weight: 300;
-  }
-  .hd-badge {
-    flex-shrink: 0;
-    background: var(--navy-light);
-    border-radius: var(--rs);
-    padding: 10px 14px;
-    text-align: center;
-  }
-  .hd-badge-val {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--blue);
-    line-height: 1;
-    margin-bottom: 3px;
-  }
-  .hd-badge-lbl {
-    font-size: 9px;
-    color: var(--blue-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 500;
-  }
+/* diagonal accent stripe */
+.hd::before{
+  content:'';
+  position:absolute;
+  top:0;right:0;
+  width:42%;height:100%;
+  background:linear-gradient(135deg,transparent 35%,rgba(74,158,240,.07) 35%);
+  pointer-events:none;
+}
 
-  /* ── METRICS STRIPE ───────────────────────────────────────── */
-  .mtr {
-    background: var(--navy-mid);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .mtr-item {
-    text-align: center;
-    padding: 12px 8px;
-    position: relative;
-  }
-  .mtr-item + .mtr-item::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 20%; height: 60%;
-    width: 1px;
-    background: var(--navy-light);
-  }
-  .mtr-val {
-    font-family: 'Syne', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--blue);
-    line-height: 1.1;
-    margin-bottom: 3px;
-  }
-  .mtr-lbl {
-    font-size: 8.5px;
-    color: var(--blue-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 500;
-  }
+/* radial glows */
+.hd-glow1{
+  position:absolute;
+  top:-60px;left:-60px;
+  width:260px;height:260px;
+  background:radial-gradient(circle,rgba(74,158,240,.13) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hd-glow2{
+  position:absolute;
+  bottom:-50px;right:60px;
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(29,158,117,.10) 0%,transparent 65%);
+  pointer-events:none;
+}
 
-  /* ── BODY ─────────────────────────────────────────────────── */
-  .bd {
-    padding: 22px 28px 26px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px 22px;
-    flex: 1;
+.hd-inner{
+  position:relative;z-index:1;
+  display:flex;
+  align-items:stretch;
+}
+
+/* left content */
+.hd-main{
+  flex:1;
+  padding:30px 28px 26px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.hd-top{}
+.hd-brand{
+  font-family:'Syne',sans-serif;
+  font-size:9px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--blue-dim);
+  margin-bottom:12px;
+}
+.hd-title{
+  font-family:'Syne',sans-serif;
+  font-size:32px;font-weight:800;
+  color:var(--white);
+  line-height:1.1;letter-spacing:-.03em;
+  margin-bottom:8px;
+}
+.hd-title em{color:var(--blue);font-style:normal;}
+.hd-period{
+  font-size:11.5px;font-weight:300;
+  color:var(--blue-dim);
+  letter-spacing:.03em;
+}
+
+/* pill tags */
+.hd-tags{
+  display:flex;gap:6px;flex-wrap:wrap;
+}
+.tag{
+  font-family:'Syne',sans-serif;
+  font-size:8px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 11px;border-radius:40px;
+}
+.tag-blue{background:rgba(74,158,240,.15);color:var(--blue);border:1px solid rgba(74,158,240,.25);}
+.tag-teal{background:rgba(29,158,117,.15);color:#2BC691;border:1px solid rgba(29,158,117,.25);}
+.tag-white{background:rgba(255,255,255,.06);color:var(--blue-dim);border:1px solid rgba(255,255,255,.1);}
+
+/* right sidebar - big number */
+.hd-side{
+  width:130px;
+  background:rgba(0,0,0,.18);
+  border-left:1px solid rgba(255,255,255,.06);
+  display:flex;flex-direction:column;
+  padding:22px 16px;
+  gap:18px;
+  justify-content:center;
+  align-items:center;
+}
+.hd-stat{text-align:center;}
+.hd-stat-val{
+  font-family:'Syne',sans-serif;
+  font-size:22px;font-weight:800;
+  color:var(--blue);line-height:1;
+  letter-spacing:-.03em;
+  margin-bottom:4px;
+}
+.hd-stat-lbl{
+  font-size:8px;font-weight:500;
+  color:var(--blue-dim);
+  text-transform:uppercase;letter-spacing:.09em;
+  line-height:1.4;
+}
+.hd-sep{width:32px;height:1px;background:rgba(255,255,255,.08);}
+
+/* ─────────────────────────────────────────────────────────────────
+   METRICS STRIPE
+───────────────────────────────────────────────────────────────── */
+.metrics{
+  background:var(--navy-mid);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.m{
+  padding:14px 10px;
+  text-align:center;
+  position:relative;
+}
+.m+.m::before{
+  content:'';
+  position:absolute;
+  left:0;top:18%;height:64%;
+  width:1px;background:rgba(255,255,255,.07);
+}
+.m-val{
+  font-family:'Syne',sans-serif;
+  font-size:18px;font-weight:700;
+  color:var(--blue);line-height:1.1;
+  letter-spacing:-.02em;margin-bottom:3px;
+}
+.m-lbl{
+  font-size:8px;font-weight:500;
+  color:var(--blue-dim);
+  text-transform:uppercase;letter-spacing:.08em;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   BODY GRID
+───────────────────────────────────────────────────────────────── */
+.body{
+  padding:22px 26px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px 20px;
+  align-content:start;
+}
+.full{grid-column:1/-1;}
+
+/* section header */
+.s-label{
+  font-family:'Syne',sans-serif;
+  font-size:8.5px;font-weight:700;
+  letter-spacing:.13em;text-transform:uppercase;
+  color:var(--blue);
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:11px;
+}
+.s-label::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,var(--border),transparent);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   EVOLUTION CHART
+───────────────────────────────────────────────────────────────── */
+.evo{display:flex;flex-direction:column;gap:5px;}
+.evo-row{display:grid;grid-template-columns:52px 1fr 42px 56px;align-items:center;gap:6px;}
+.evo-mes{font-size:10px;color:var(--muted);white-space:nowrap;}
+.evo-bar-wrap{height:21px;background:var(--surface);border-radius:4px;overflow:hidden;}
+.evo-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 9px;}
+.evo-bar span{font-size:10px;font-weight:500;white-space:nowrap;}
+.b-best{background:#1D9E75;} .b-best span{color:#C8F2E4;}
+.b-good{background:#2F82D0;} .b-good span{color:#D6EAFB;}
+.b-mid {background:#C8820E;} .b-mid  span{color:#FEF0CC;}
+.b-bad {background:#D94544;} .b-bad  span{color:#FFE0DF;}
+.evo-num{
+  font-size:11px;font-weight:500;
+  text-align:right;white-space:nowrap;
+}
+.c-g{color:var(--teal);}
+.c-r{color:var(--red);}
+.c-a{color:var(--amber);}
+.c-b{color:#3B8ED4;}
+.evo-badge{text-align:right;}
+.eb{
+  display:inline-block;
+  font-size:8px;font-weight:600;
+  padding:2px 7px;border-radius:20px;
+  white-space:nowrap;
+}
+.eb-best{background:var(--teal-lt);color:var(--teal-dk);}
+.eb-bad {background:#FFEBEE;color:#7B1A1A;}
+.eb-nil {visibility:hidden;}
+
+/* efficiency callout */
+.eff{
+  margin-top:10px;
+  background:var(--navy);
+  border-radius:var(--r);
+  padding:10px 13px;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.eff-icon{
+  width:26px;height:26px;
+  background:var(--navy-card);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.eff-text{font-size:9.5px;color:var(--blue-dim);line-height:1.65;}
+.eff-text strong{color:var(--blue);font-weight:500;}
+
+/* ─────────────────────────────────────────────────────────────────
+   CAMPAIGN COMPARE
+───────────────────────────────────────────────────────────────── */
+.cmp{display:flex;flex-direction:column;gap:8px;}
+.cmp-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.cmp-card{border-radius:var(--r);padding:14px;}
+.cmp-card.neg{background:#FFF1F1;border:1px solid #FFCDD2;}
+.cmp-card.pos{background:#F1FBF6;border:1px solid #BADECC;}
+.cmp-card-ttl{
+  font-family:'Syne',sans-serif;
+  font-size:8px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.cmp-card.neg .cmp-card-ttl{color:#C62828;}
+.cmp-card.pos .cmp-card-ttl{color:#1B5E20;}
+.cmp-num{
+  font-family:'Syne',sans-serif;
+  font-size:26px;font-weight:800;
+  line-height:1;margin-bottom:5px;
+  letter-spacing:-.03em;
+}
+.cmp-card.neg .cmp-num{color:#E53935;}
+.cmp-card.pos .cmp-num{color:#2E7D32;}
+.cmp-body{font-size:9.5px;line-height:1.55;}
+.cmp-card.neg .cmp-body{color:#B71C1C;}
+.cmp-card.pos .cmp-body{color:#1B5E20;}
+.cmp-note{
+  font-size:9px;color:var(--muted);
+  text-align:center;
+  padding:4px 0;
+}
+.cmp-note strong{color:var(--ink);}
+
+/* ─────────────────────────────────────────────────────────────────
+   ADS TABLE
+───────────────────────────────────────────────────────────────── */
+.ads{display:flex;flex-direction:column;gap:8px;}
+.ads-half{border:1px solid var(--border);border-radius:var(--r);padding:12px;}
+.ads-ttl{
+  font-family:'Syne',sans-serif;
+  font-size:8px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:9px;display:flex;align-items:center;gap:5px;
+}
+.ads-ttl.ok{color:#1B5E20;}
+.ads-ttl.bad{color:#C62828;}
+.ads-ttl .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.dot-ok{background:#1D9E75;} .dot-bad{background:#E24B4A;}
+.ad-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:5px 0;border-bottom:1px solid var(--border);gap:8px;
+}
+.ad-row:last-child{border-bottom:none;padding-bottom:0;}
+.ad-name{font-size:10px;color:var(--ink);}
+.badge{
+  font-size:9px;font-weight:500;
+  padding:2px 9px;border-radius:20px;
+  white-space:nowrap;flex-shrink:0;
+}
+.bG{background:#E8F5E9;color:#1B5E20;}
+.bR{background:#FFEBEE;color:#C62828;}
+
+/* ─────────────────────────────────────────────────────────────────
+   HALLAZGOS
+───────────────────────────────────────────────────────────────── */
+.probs{display:flex;flex-direction:column;gap:8px;}
+.prob{
+  display:flex;gap:12px;
+  border-radius:var(--r);
+  padding:11px 13px;
+  border-left:3px solid var(--red);
+  background:var(--red-lt);
+}
+.prob-n{
+  font-family:'Syne',sans-serif;
+  font-size:18px;font-weight:800;
+  color:var(--red);flex-shrink:0;
+  line-height:1.15;width:22px;
+}
+.prob-body{font-size:10px;color:#2A2A2A;line-height:1.65;}
+.prob-body strong{
+  display:block;
+  font-family:'Syne',sans-serif;
+  font-size:10.5px;font-weight:700;
+  color:#9B1C1C;margin-bottom:3px;
+}
+.callout{
+  background:#FFFBEB;
+  border:1px solid #FFE082;
+  border-radius:var(--r-sm);
+  padding:7px 9px;margin-top:7px;
+  font-size:9px;color:#7B4F00;line-height:1.6;
+}
+.callout em{font-style:normal;font-weight:600;}
+
+/* ─────────────────────────────────────────────────────────────────
+   METAS
+───────────────────────────────────────────────────────────────── */
+.metas{display:flex;flex-direction:column;gap:8px;}
+.meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.meta{
+  background:var(--navy);
+  border-radius:var(--r);
+  padding:13px 10px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.meta::after{
+  content:'';position:absolute;
+  bottom:-20px;right:-20px;
+  width:64px;height:64px;
+  background:radial-gradient(circle,rgba(74,158,240,.12) 0%,transparent 70%);
+}
+.meta-val{
+  font-family:'Syne',sans-serif;
+  font-size:17px;font-weight:700;
+  color:var(--blue);line-height:1.15;
+  margin-bottom:4px;letter-spacing:-.02em;
+}
+.meta-lbl{font-size:8.5px;color:var(--blue-dim);line-height:1.4;}
+.meta-ppto{
+  background:var(--navy-card);
+  border:1px solid rgba(74,158,240,.12);
+  border-radius:var(--r);
+  padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.meta-ppto-val{
+  font-family:'Syne',sans-serif;
+  font-size:18px;font-weight:800;
+  color:var(--blue);letter-spacing:-.02em;
+  line-height:1.1;
+}
+.meta-ppto-lbl{font-size:9px;color:var(--blue-dim);}
+.meta-ppto-icon{
+  width:32px;height:32px;
+  background:rgba(74,158,240,.1);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   PAGE FOOTER
+───────────────────────────────────────────────────────────────── */
+.foot{
+  border-top:1px solid var(--border);
+  padding:9px 26px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--surface);
+}
+.foot-brand{
+  font-family:'Syne',sans-serif;
+  font-size:8.5px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);
+}
+.foot-r{
+  display:flex;align-items:center;gap:14px;
+}
+.foot-note{font-size:8.5px;color:var(--muted);}
+.foot-dot{width:3px;height:3px;border-radius:50%;background:var(--border);}
+
+/* ─────────────────────────────────────────────────────────────────
+   PRINT
+───────────────────────────────────────────────────────────────── */
+@media print{
+  @page{size:A4 portrait;margin:0;}
+  body{background:none;padding:0;}
+  .print-cta{display:none!important;}
+  .page{
+    width:210mm;min-height:297mm;
+    box-shadow:none;
   }
+}
 
-  .sec { display: flex; flex-direction: column; gap: 10px; }
-  .sec.full { grid-column: 1 / -1; }
-
-  .sec-lbl {
-    font-family: 'Syne', sans-serif;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--blue);
-    border-left: 3px solid var(--blue);
-    padding-left: 9px;
-    line-height: 1.4;
-  }
-
-  /* ── EVOLUTION TABLE ──────────────────────────────────────── */
-  .evo-table { width: 100%; border-collapse: collapse; }
-  .evo-table thead th {
-    font-size: 8px;
-    font-weight: 500;
-    color: var(--gray-400);
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    padding: 0 5px 7px;
-    text-align: left;
-  }
-  .evo-table thead th:last-child { text-align: right; }
-  .evo-table tbody td { padding: 3px 5px; vertical-align: middle; }
-  .ev-mes { font-size: 10.5px; color: var(--gray-600); white-space: nowrap; width: 58px; }
-  .bar-wrap { height: 22px; background: var(--gray-100); border-radius: 5px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 5px; display: flex; align-items: center; padding: 0 8px; }
-  .bar-fill span { font-size: 10px; font-weight: 500; white-space: nowrap; }
-  .f-best { background: #1D9E75; } .f-best span { color: #E1F5EE; }
-  .f-good { background: #378ADD; } .f-good span { color: #E6F1FB; }
-  .f-mid  { background: #BA7517; } .f-mid  span { color: #FAEEDA; }
-  .f-bad  { background: #E24B4A; } .f-bad  span { color: #FCEBEB; }
-  .ev-msgs { font-size: 11px; font-weight: 500; text-align: right; white-space: nowrap; padding-left: 8px; }
-  .msgs-p { color: var(--green); } .msgs-n { color: var(--red); }
-  .msgs-m { color: var(--amber); } .msgs-b { color: #378ADD; }
-  .tag-best { font-size: 8px; font-weight: 600; background: #E1F5EE; color: #085041; padding: 2px 7px; border-radius: 20px; white-space: nowrap; }
-  .tag-bad  { font-size: 8px; font-weight: 600; background: #FFEBEE; color: #791F1F; padding: 2px 7px; border-radius: 20px; white-space: nowrap; }
-  .tag-hide { visibility: hidden; font-size: 8px; }
-
-  /* ── CAMPAÑAS COMPARE ─────────────────────────────────────── */
-  .cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .cmp { border-radius: var(--rs); padding: 13px; }
-  .cmp.neg { background: #FFF0F0; border: 1px solid #FFCDD2; }
-  .cmp.pos { background: #F0FBF5; border: 1px solid #B2DFCC; }
-  .cmp-hd { font-family: 'Syne', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 7px; }
-  .cmp.neg .cmp-hd { color: #C62828; }
-  .cmp.pos .cmp-hd { color: #1B5E20; }
-  .cmp-num { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; line-height: 1; margin-bottom: 5px; letter-spacing: -0.02em; }
-  .cmp.neg .cmp-num { color: #E53935; }
-  .cmp.pos .cmp-num { color: #2E7D32; }
-  .cmp-sub { font-size: 10px; line-height: 1.55; }
-  .cmp.neg .cmp-sub { color: #B71C1C; }
-  .cmp.pos .cmp-sub { color: #1B5E20; }
-  .cmp-ft { font-size: 9.5px; color: var(--gray-400); text-align: center; margin-top: 8px; }
-
-  /* ── ADS ──────────────────────────────────────────────────── */
-  .ads-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .ads-card { background: var(--white); border: 1px solid #E8EDF4; border-radius: var(--rs); padding: 12px; }
-  .ads-ttl { font-family: 'Syne', sans-serif; font-size: 8.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 9px; }
-  .ads-ttl.g { color: #1B5E20; } .ads-ttl.r { color: #C62828; }
-  .ad-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid #F0F4F8; gap: 6px; }
-  .ad-row:last-child { border-bottom: none; }
-  .ad-name { font-size: 10px; color: var(--text); }
-  .badge { font-size: 9px; font-weight: 500; padding: 2px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
-  .bg { background: #E8F5E9; color: #1B5E20; }
-  .br { background: #FFEBEE; color: #C62828; }
-
-  /* ── HALLAZGOS ────────────────────────────────────────────── */
-  .probs { display: flex; flex-direction: column; gap: 8px; }
-  .prob { display: flex; gap: 12px; border-radius: var(--rs); padding: 11px 13px; border-left: 3px solid var(--red); background: var(--red-lt); }
-  .prob-num { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: var(--red); flex-shrink: 0; line-height: 1.2; width: 22px; }
-  .prob-body { font-size: 10.5px; color: #2A2A2A; line-height: 1.6; }
-  .prob-body strong { display: block; font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; color: var(--red-dk); margin-bottom: 3px; }
-  .highlight-box {
-    background: #FFFBEB;
-    border: 1px solid #FFE082;
-    border-radius: var(--rs);
-    padding: 7px 10px;
-    margin-top: 8px;
-    font-size: 9.5px;
-    color: #7B4F00;
-    line-height: 1.55;
-  }
-  .highlight-box span { font-weight: 500; }
-
-  /* ── METAS ────────────────────────────────────────────────── */
-  .metas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .meta {
-    background: var(--navy);
-    border-radius: var(--rs);
-    padding: 13px 8px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .meta::after {
-    content: '';
-    position: absolute;
-    bottom: -18px; right: -18px;
-    width: 60px; height: 60px;
-    background: radial-gradient(circle, rgba(74,158,240,.1) 0%, transparent 70%);
-  }
-  .meta-val { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--blue); line-height: 1.2; margin-bottom: 4px; }
-  .meta-lbl { font-size: 9px; color: var(--blue-muted); line-height: 1.4; }
-  .meta-ppto {
-    background: var(--navy);
-    border-radius: var(--rs);
-    padding: 11px 14px;
-    text-align: center;
-    margin-top: 8px;
-  }
-  .meta-ppto .meta-val { font-size: 15px; }
-
-  /* ── EFICIENCIA NOTE ──────────────────────────────────────── */
-  .ef-box {
-    background: var(--navy);
-    border-radius: var(--rs);
-    padding: 11px 13px;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    margin-top: 10px;
-  }
-  .ef-icon {
-    width: 28px; height: 28px;
-    background: var(--navy-mid);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; margin-top: 1px;
-  }
-  .ef-text { font-size: 10px; color: var(--blue-muted); line-height: 1.6; }
-  .ef-text strong { color: var(--blue); font-weight: 500; }
-
-  /* ── FOOTER ───────────────────────────────────────────────── */
-  .pg-foot {
-    border-top: 1px solid #E8EDF4;
-    padding: 10px 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .pg-foot-brand { font-family: 'Syne', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); }
-  .pg-foot-note  { font-size: 9px; color: var(--gray-400); }
-
-  /* ── PRINT STYLES ─────────────────────────────────────────── */
-  @media print {
-    @page { size: A4; margin: 0; }
-
-    body { background: none; padding: 0; }
-
-    .print-btn { display: none !important; }
-
-    .page {
-      width: 210mm;
-      min-height: 297mm;
-      border-radius: 0;
-      box-shadow: none;
-    }
-  }
-
-  /* ── SCREEN — tighter on small screens ───────────────────── */
-  @media (max-width: 240mm) {
-    .page { width: 100%; border-radius: 0; }
-    .bd { grid-template-columns: 1fr; }
-    .sec.full { grid-column: auto; }
-  }
+/* small viewports */
+@media(max-width:640px){
+  .page{width:100%;}
+  .body{grid-template-columns:1fr;}
+  .full{grid-column:auto;}
+}
 </style>
 </head>
 <body>
 
-<button class="print-btn" onclick="window.print()">
-  <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-    <rect x="3" y="1" width="9" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/>
-    <path d="M3 6H1.5A.5.5 0 001 6.5v5a.5.5 0 00.5.5H3v-3h9v3h1.5a.5.5 0 00.5-.5v-5a.5.5 0 00-.5-.5H12" stroke="currentColor" stroke-width="1.3"/>
-    <rect x="3" y="9" width="9" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/>
-  </svg>
-  Imprimir folleto
-</button>
+<!-- PRINT BUTTON -->
+<div class="print-cta">
+  <button class="print-btn" onclick="window.print()">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+      <rect x="3.5" y="1.5" width="9" height="4" rx="1" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M3.5 5.5H2a.5.5 0 00-.5.5v5a.5.5 0 00.5.5h1.5v-3h9v3H14a.5.5 0 00.5-.5V6a.5.5 0 00-.5-.5h-1.5" stroke="currentColor" stroke-width="1.4"/>
+      <rect x="3.5" y="9.5" width="9" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/>
+      <circle cx="12.5" cy="7.5" r="0.75" fill="currentColor"/>
+    </svg>
+    Imprimir folleto
+  </button>
+  <span class="print-hint">Ctrl + P · tamaño A4 · sin márgenes</span>
+</div>
 
+<!-- A4 PAGE -->
 <div class="page">
 
-  <!-- HEADER -->
+  <!-- ── HEADER ────────────────────────────────────────────── -->
   <div class="hd">
+    <div class="hd-glow1"></div>
+    <div class="hd-glow2"></div>
     <div class="hd-inner">
-      <div class="hd-left">
-        <p class="hd-eyebrow">JNR Digital &nbsp;·&nbsp; Meta Ads &nbsp;·&nbsp; Diagnóstico Abr 2026</p>
-        <h1 class="hd-title">Reporte &amp; Plan<br><span>Unos Tipos Duros</span></h1>
-        <p class="hd-sub">Oct 2025 – Abr 2026 &nbsp;·&nbsp; Resultados, hallazgos y metas</p>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div class="hd-badge">
-          <p class="hd-badge-val">3.117</p>
-          <p class="hd-badge-lbl">Conversaciones</p>
+
+      <div class="hd-main">
+        <div class="hd-top">
+          <p class="hd-brand">JNR Digital &nbsp;·&nbsp; Meta Ads &nbsp;·&nbsp; Diagnóstico</p>
+          <h1 class="hd-title">
+            Reporte &amp; Plan<br>
+            <em>Unos Tipos Duros</em>
+          </h1>
+          <p class="hd-period">Octubre 2025 – Abril 2026 &nbsp;·&nbsp; Resultados, hallazgos y metas</p>
         </div>
-        <div class="hd-badge">
-          <p class="hd-badge-val">$2.025</p>
-          <p class="hd-badge-lbl">CPM promedio</p>
+        <div class="hd-tags">
+          <span class="tag tag-blue">Meta Ads</span>
+          <span class="tag tag-teal">WhatsApp</span>
+          <span class="tag tag-white">Barranquilla · Colombia</span>
+          <span class="tag tag-white">7 meses activos</span>
         </div>
       </div>
+
+      <div class="hd-side">
+        <div class="hd-stat">
+          <p class="hd-stat-val">3.117</p>
+          <p class="hd-stat-lbl">Conver&shy;saciones</p>
+        </div>
+        <div class="hd-sep"></div>
+        <div class="hd-stat">
+          <p class="hd-stat-val">313K</p>
+          <p class="hd-stat-lbl">Personas alcanzadas</p>
+        </div>
+        <div class="hd-sep"></div>
+        <div class="hd-stat">
+          <p class="hd-stat-val">$6,3M</p>
+          <p class="hd-stat-lbl">COP invertidos</p>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- METRICS STRIPE -->
-  <div class="mtr">
-    <div class="mtr-item">
-      <p class="mtr-val">$6.311.527</p>
-      <p class="mtr-lbl">COP invertidos</p>
+  <!-- ── METRICS STRIPE ─────────────────────────────────────── -->
+  <div class="metrics">
+    <div class="m">
+      <p class="m-val">$6.311.527</p>
+      <p class="m-lbl">COP invertidos total</p>
     </div>
-    <div class="mtr-item">
-      <p class="mtr-val">313.129</p>
-      <p class="mtr-lbl">Personas alcanzadas</p>
+    <div class="m">
+      <p class="m-val">$2.025</p>
+      <p class="m-lbl">Costo prom. por mensaje</p>
     </div>
-    <div class="mtr-item">
-      <p class="mtr-val">$2.025</p>
-      <p class="mtr-lbl">Costo por mensaje (prom.)</p>
+    <div class="m">
+      <p class="m-val">$929</p>
+      <p class="m-lbl">Mín. costo / conversación</p>
     </div>
   </div>
 
-  <!-- BODY GRID -->
-  <div class="bd">
+  <!-- ── BODY ───────────────────────────────────────────────── -->
+  <div class="body">
 
-    <!-- EVOLUCIÓN -->
-    <div class="sec full">
-      <p class="sec-lbl">Evolución mes a mes — costo por mensaje y conversaciones</p>
-      <table class="evo-table">
-        <thead>
-          <tr>
-            <th>Mes</th>
-            <th>Costo por mensaje</th>
-            <th style="text-align:right">Convers.</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="ev-mes">Oct 2025</td>
-            <td><div class="bar-wrap"><div class="bar-fill f-mid" style="width:51%"><span>$2.476</span></div></div></td>
-            <td class="ev-msgs msgs-m">376</td>
-            <td><span class="tag-hide">—</span></td>
-          </tr>
-          <tr>
-            <td class="ev-mes">Nov 2025</td>
-            <td><div class="bar-wrap"><div class="bar-fill f-best" style="width:28%"><span>$1.377</span></div></div></td>
-            <td class="ev-msgs msgs-p">743</td>
-            <td><span class="tag-best">Mejor mes</span></td>
-          </tr>
-          <tr>
-            <td class="ev-mes">Dic 2025</td>
-            <td><div class="bar-wrap"><div class="bar-fill f-good" style="width:39%"><span>$1.906</span></div></div></td>
-            <td class="ev-msgs msgs-b">395</td>
-            <td><span class="tag-hide">—</span></td>
-          </tr>
-          <tr>
-            <td class="ev-mes">Ene 2026</td>
-            <td><div class="bar-wrap"><div class="bar-fill f-good" style="width:33%"><span>$1.591</span></div></div></td>
-            <td class="ev-msgs msgs-p">643</td>
-            <td><span class="tag-hide">—</span></td>
-          </tr>
-          <tr>
-            <td class="ev-mes">Feb 2026</td>
-            <td><div class="bar-wrap"><div class="bar-fill f-mid" style="width:47%"><span>$2.320</span></div></div></td>
-            <td class="ev-msgs msgs-m">424</td>
-            <td><span class="tag-hide">—</span></td>
-          </tr>
-          <tr>
-            <td class="ev-mes">Mar 2026</td>
-            <td><div class="bar-wrap"><div class="bar-fill f-bad" style="width:62%"><span>$3.037</span></div></div></td>
-            <td class="ev-msgs msgs-n">501</td>
-            <td><span class="tag-bad">Peor mes</span></td>
-          </tr>
-          <tr>
-            <td class="ev-mes">Abr 2026</td>
-            <td><div class="bar-wrap"><div class="bar-fill f-mid" style="width:45%"><span>$2.187</span></div></div></td>
-            <td class="ev-msgs msgs-m">35</td>
-            <td><span class="tag-hide">—</span></td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="ef-box">
-        <div class="ef-icon">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="8" r="7" stroke="#4A9EF0" stroke-width="1.3"/>
-            <path d="M8 5v3.5l2 1.5" stroke="#4A9EF0" stroke-width="1.3" stroke-linecap="round"/>
+    <!-- EVOLUCIÓN (full width) -->
+    <div class="full">
+      <p class="s-label">Evolución mes a mes — costo por mensaje y volumen de conversaciones</p>
+      <div class="evo">
+        <div class="evo-row">
+          <span class="evo-mes">Oct 2025</span>
+          <div class="evo-bar-wrap"><div class="evo-bar b-mid" style="width:51%"><span>$2.476</span></div></div>
+          <span class="evo-num c-a">376</span>
+          <div class="evo-badge"><span class="eb eb-nil">—</span></div>
+        </div>
+        <div class="evo-row">
+          <span class="evo-mes">Nov 2025</span>
+          <div class="evo-bar-wrap"><div class="evo-bar b-best" style="width:28%"><span>$1.377</span></div></div>
+          <span class="evo-num c-g">743</span>
+          <div class="evo-badge"><span class="eb eb-best">Mejor mes</span></div>
+        </div>
+        <div class="evo-row">
+          <span class="evo-mes">Dic 2025</span>
+          <div class="evo-bar-wrap"><div class="evo-bar b-good" style="width:39%"><span>$1.906</span></div></div>
+          <span class="evo-num c-b">395</span>
+          <div class="evo-badge"><span class="eb eb-nil">—</span></div>
+        </div>
+        <div class="evo-row">
+          <span class="evo-mes">Ene 2026</span>
+          <div class="evo-bar-wrap"><div class="evo-bar b-good" style="width:33%"><span>$1.591</span></div></div>
+          <span class="evo-num c-g">643</span>
+          <div class="evo-badge"><span class="eb eb-nil">—</span></div>
+        </div>
+        <div class="evo-row">
+          <span class="evo-mes">Feb 2026</span>
+          <div class="evo-bar-wrap"><div class="evo-bar b-mid" style="width:47%"><span>$2.320</span></div></div>
+          <span class="evo-num c-a">424</span>
+          <div class="evo-badge"><span class="eb eb-nil">—</span></div>
+        </div>
+        <div class="evo-row">
+          <span class="evo-mes">Mar 2026</span>
+          <div class="evo-bar-wrap"><div class="evo-bar b-bad" style="width:62%"><span>$3.037</span></div></div>
+          <span class="evo-num c-r">501</span>
+          <div class="evo-badge"><span class="eb eb-bad">Peor mes</span></div>
+        </div>
+        <div class="evo-row">
+          <span class="evo-mes">Abr 2026</span>
+          <div class="evo-bar-wrap"><div class="evo-bar b-mid" style="width:45%"><span>$2.187</span></div></div>
+          <span class="evo-num c-a">35</span>
+          <div class="evo-badge"><span class="eb eb-nil">—</span></div>
+        </div>
+      </div>
+      <div class="eff">
+        <div class="eff-icon">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="6.5" stroke="#4A9EF0" stroke-width="1.3"/>
+            <path d="M8 5v3.4l2.1 1.6" stroke="#4A9EF0" stroke-width="1.3" stroke-linecap="round"/>
           </svg>
         </div>
-        <p class="ef-text"><strong>Dato clave:</strong> marzo fue el mes de mayor inversión (<strong>$1.521.613</strong>) y aún así generó menos conversaciones que enero, que gastó <strong>$500.000 menos</strong>. Más presupuesto no garantiza mejores resultados.</p>
+        <p class="eff-text">
+          <strong>Dato clave:</strong> marzo fue el mes de mayor inversión (<strong>$1.521.613</strong>) y aun así generó menos conversaciones que enero, que gastó <strong>$500.000 menos</strong>. Mayor presupuesto no garantiza mejores resultados.
+        </p>
       </div>
     </div>
 
-    <!-- CAMPAÑAS -->
-    <div class="sec">
-      <p class="sec-lbl">Visitas al perfil vs. campañas estructuradas</p>
-      <div class="cmp-grid">
-        <div class="cmp neg">
-          <p class="cmp-hd">Visitas al perfil</p>
-          <p class="cmp-num">$30.481</p>
-          <p class="cmp-sub">por mensaje · 38 conversaciones · 18% del presupuesto</p>
+    <!-- COMPARE CAMPAÑAS -->
+    <div>
+      <p class="s-label">Tipo de campaña vs. costo</p>
+      <div class="cmp">
+        <div class="cmp-row">
+          <div class="cmp-card neg">
+            <p class="cmp-card-ttl">Visitas al perfil</p>
+            <p class="cmp-num">$30.481</p>
+            <p class="cmp-body">por mensaje · solo 38 conversaciones · 18% del presupuesto total</p>
+          </div>
+          <div class="cmp-card pos">
+            <p class="cmp-card-ttl">Campañas estructuradas</p>
+            <p class="cmp-num">$1.674</p>
+            <p class="cmp-body">por mensaje · 3.079 conversaciones · 82% del presupuesto total</p>
+          </div>
         </div>
-        <div class="cmp pos">
-          <p class="cmp-hd">Campañas estructuradas</p>
-          <p class="cmp-num">$1.674</p>
-          <p class="cmp-sub">por mensaje · 3.079 conversaciones · 82% del presupuesto</p>
-        </div>
-      </div>
-      <p class="cmp-ft">Las visitas al perfil costaron <strong>22×</strong> más por mensaje</p>
-    </div>
-
-    <!-- ANUNCIOS -->
-    <div class="sec">
-      <p class="sec-lbl">Anuncios — mejor y mayor costo</p>
-      <div class="ads-grid">
-        <div class="ads-card">
-          <p class="ads-ttl g">Mayor rendimiento</p>
-          <div class="ad-row"><span class="ad-name">Letras 3D (v. ID)</span><span class="badge bg">$997</span></div>
-          <div class="ad-row"><span class="ad-name">Letras 3D</span><span class="badge bg">$1.051</span></div>
-          <div class="ad-row"><span class="ad-name">Letra G</span><span class="badge bg">$1.321</span></div>
-        </div>
-        <div class="ads-card">
-          <p class="ads-ttl r">Mayor costo</p>
-          <div class="ad-row"><span class="ad-name">"Y mientras el sol..."</span><span class="badge br">$44.690</span></div>
-          <div class="ad-row"><span class="ad-name">"Diseñadas para..."</span><span class="badge br">$34.835</span></div>
-          <div class="ad-row"><span class="ad-name">"En Barranquilla..."</span><span class="badge br">$34.708</span></div>
-        </div>
+        <p class="cmp-note">Las visitas al perfil costaron <strong>22 veces más</strong> por mensaje</p>
       </div>
     </div>
 
-    <!-- HALLAZGOS -->
-    <div class="sec full">
-      <p class="sec-lbl">Hallazgos críticos</p>
+    <!-- ADS -->
+    <div>
+      <p class="s-label">Anuncios — rendimiento</p>
+      <div class="ads">
+        <div class="ads-half">
+          <p class="ads-ttl ok"><span class="dot dot-ok"></span>Mayor rendimiento</p>
+          <div class="ad-row"><span class="ad-name">Letras 3D (variante ID)</span><span class="badge bG">$997 / conv.</span></div>
+          <div class="ad-row"><span class="ad-name">Letras 3D</span><span class="badge bG">$1.051 / conv.</span></div>
+          <div class="ad-row"><span class="ad-name">Letra G</span><span class="badge bG">$1.321 / conv.</span></div>
+        </div>
+        <div class="ads-half">
+          <p class="ads-ttl bad"><span class="dot dot-bad"></span>Mayor costo por conversación</p>
+          <div class="ad-row"><span class="ad-name">"Y mientras el sol..."</span><span class="badge bR">$44.690</span></div>
+          <div class="ad-row"><span class="ad-name">"Diseñadas para..."</span><span class="badge bR">$34.835</span></div>
+          <div class="ad-row"><span class="ad-name">"En Barranquilla..."</span><span class="badge bR">$34.708</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HALLAZGOS (full width) -->
+    <div class="full">
+      <p class="s-label">Hallazgos críticos</p>
       <div class="probs">
         <div class="prob">
-          <span class="prob-num">01</span>
+          <span class="prob-n">01</span>
           <div class="prob-body">
             <strong>Campañas con objetivo equivocado</strong>
-            17 de 29 campañas configuradas para visitas al perfil, no conversaciones. $1.158.263 COP para solo 38 resultados. Las audiencias recolectadas nunca se utilizaron para reimpactar con mensaje directo a WhatsApp.
+            17 de 29 campañas configuradas para visitas al perfil, no conversaciones. $1.158.263 COP para apenas 38 resultados. Las audiencias recolectadas nunca fueron reimpactadas con mensaje directo a WhatsApp.
           </div>
         </div>
         <div class="prob">
-          <span class="prob-num">02</span>
+          <span class="prob-n">02</span>
           <div class="prob-body">
-            <strong>Deterioro progresivo del costo por conversación</strong>
-            El costo escaló un 120% en 5 meses: $1.377 en noviembre → $3.037 en marzo. La campaña principal tuvo un deterioro del 150% en 3 meses — señal de agotamiento de audiencia y creatividades.
-            <div class="highlight-box">Con $1.000.000 COP en noviembre → ~726 conversaciones · mismo presupuesto en marzo → <span>apenas ~329</span>.</div>
+            <strong>Deterioro progresivo del costo por conversación (+120% en 5 meses)</strong>
+            De $1.377 en noviembre a $3.037 en marzo. La campaña principal deterioró un 150% en 3 meses: agotamiento de audiencia y creatividades sin renovar.
+            <div class="callout">Con $1.000.000 COP en noviembre → ~726 conversaciones · en marzo con el mismo presupuesto → <em>apenas ~329</em>.</div>
           </div>
         </div>
         <div class="prob">
-          <span class="prob-num">03</span>
+          <span class="prob-n">03</span>
           <div class="prob-body">
-            <strong>La fórmula ganadora fue pausada sin justificación</strong>
-            La estructura con menor costo histórico ($929/conversación) fue reemplazada por campañas de Reels e interacción, con costo significativamente más alto y sin mejora en conversaciones.
+            <strong>La fórmula ganadora fue pausada sin justificación de rendimiento</strong>
+            La estructura con menor costo histórico ($929/conversación) fue reemplazada por campañas de Reels e interacción sin evidencia de mejora en conversaciones.
           </div>
         </div>
       </div>
     </div>
 
-    <!-- METAS -->
-    <div class="sec full">
-      <p class="sec-lbl">Metas — mayo 2026</p>
-      <div class="metas-grid">
-        <div class="meta">
-          <p class="meta-val">&lt; $2.000</p>
-          <p class="meta-lbl">Costo por conversación objetivo (COP)</p>
+    <!-- METAS (full width) -->
+    <div class="full">
+      <p class="s-label">Metas mayo 2026</p>
+      <div class="metas">
+        <div class="meta-grid">
+          <div class="meta">
+            <p class="meta-val">&lt; $2.000</p>
+            <p class="meta-lbl">Costo por conversación objetivo (COP)</p>
+          </div>
+          <div class="meta">
+            <p class="meta-val">&gt; 500</p>
+            <p class="meta-lbl">Conversaciones en el mes</p>
+          </div>
+          <div class="meta">
+            <p class="meta-val">&gt; 2% CTR</p>
+            <p class="meta-lbl">Tasa de clic mínima por anuncio</p>
+          </div>
         </div>
-        <div class="meta">
-          <p class="meta-val">&gt; 500</p>
-          <p class="meta-lbl">Conversaciones en el mes</p>
+        <div class="meta-ppto">
+          <div>
+            <p class="meta-ppto-val">$1.000.000 – $1.300.000 COP</p>
+            <p class="meta-ppto-lbl">Presupuesto mensual recomendado</p>
+          </div>
+          <div class="meta-ppto-icon">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="6.5" stroke="#4A9EF0" stroke-width="1.3"/>
+              <path d="M8 4.5v3.5l2.5 1.5" stroke="#4A9EF0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
         </div>
-        <div class="meta">
-          <p class="meta-val">&gt; 2% CTR</p>
-          <p class="meta-lbl">Tasa de clic mínima por anuncio</p>
-        </div>
-      </div>
-      <div class="meta-ppto">
-        <p class="meta-val">$1.000.000 – $1.300.000 COP</p>
-        <p class="meta-lbl">Presupuesto mensual recomendado</p>
       </div>
     </div>
 
-  </div><!-- /bd -->
+  </div><!-- /body -->
 
-  <!-- PAGE FOOTER -->
-  <div class="pg-foot">
-    <span class="pg-foot-brand">JNR Digital &nbsp;·&nbsp; Meta Ads &nbsp;·&nbsp; Unos Tipos Duros</span>
-    <span class="pg-foot-note">Diagnóstico Abril 2026 &nbsp;·&nbsp; jeissnr@gmail.com</span>
+  <!-- ── PAGE FOOTER ────────────────────────────────────────── -->
+  <div class="foot">
+    <span class="foot-brand">JNR Digital &nbsp;·&nbsp; Unos Tipos Duros</span>
+    <div class="foot-r">
+      <span class="foot-note">Meta Ads</span>
+      <span class="foot-dot"></span>
+      <span class="foot-note">Diagnóstico Abril 2026</span>
+      <span class="foot-dot"></span>
+      <span class="foot-note">jeissnr@gmail.com</span>
+    </div>
   </div>
 
 </div><!-- /page -->
